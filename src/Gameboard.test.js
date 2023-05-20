@@ -1,10 +1,14 @@
+import Ship from "./Ship";
 import Gameboard from "./Gameboard";
 
-test("ship has sunk", () => {
-  let ship = Ship(3);
-  ship.hit();
-  ship.hit();
-  ship.hit();
-  expect(ship.isSunk()).toBe(true);
+test("place ship on board", () => {
+  let ship = Ship(2);
+  let gameBoard = Gameboard();
+  gameBoard.placeShip(ship, "X", 0, 0);
+  expect(gameBoard.getBoard()).toEqual([
+    [0, 0, ,],
+    [, , ,],
+    [, , ,],
+    [, , ,],
+  ]);
 });
-

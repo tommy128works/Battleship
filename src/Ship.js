@@ -1,11 +1,9 @@
 const Ship = (length) => {
-  // hit() counter function
   let numHit = 0;
   const hit = () => {
     numHit++;
   };
 
-  // isSunk() function
   const isSunk = () => {
     if (length - numHit === 0) {
       return true;
@@ -14,7 +12,9 @@ const Ship = (length) => {
     }
   };
 
-  return { hit, isSunk };
+  const getLength = () => length;
+
+  return { hit, isSunk, getLength };
 };
 
 export default Ship;

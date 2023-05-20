@@ -8,3 +8,7 @@ test("ship has sunk", () => {
   expect(ship.isSunk()).toBe(true);
 });
 
+test("get length of ship", () => {
+  let ship = Ship(3);
+  expect(ship.getLength()).toBe(3);
+});
