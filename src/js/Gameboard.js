@@ -61,26 +61,14 @@ const Gameboard = () => {
     }
   };
 
-
-
-
-
-
-
-
-
-  // check if all ships have been sunk
-  // needs to keep track of ships
   const isGameOver = () => {
-    let allSunk = true;
+    let isAllSunk = true;
     for (let i = 0; i < shipCount; i++) {
       if (shipsArray[i].isSunk() === false) {
         allSunk = false;
       }
     }
-    if (allSunk === true) {
-      return true;
-    }
+    return isAllSunk;
   };
 
   return { getShipLayout, getBoardActivity, placeShip, receiveAttack, isGameOver };
