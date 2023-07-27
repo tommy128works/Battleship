@@ -1,39 +1,57 @@
-function createArray(length) {
-  var arr = new Array(length || 0),
-    i = length;
+const BOARD_SIZE = 10;
 
-  if (arguments.length > 1) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    while (i--) arr[length - 1 - i] = createArray.apply(this, args);
+import Ship from "../js/Ship";
+
+const createBoardArray = () => {
+  let array = new Array(BOARD_SIZE);
+
+  for (let i = 0; i < BOARD_SIZE; i++) {
+    array[i] = new Array (BOARD_SIZE);
   }
 
-  return arr;
+  return array;
 }
 
-// need to use array.some, array.forEach, and if statements
-// to check coords then use .hit on the ship hm
-// needs to let each ship store its own coords
-// but board can store missed shots 
+// create 2D array that stores shipsArray indices where the ships lay
+// create another 2D array to store where hits and misses are
+
+// things to store: hits, missed hits, ships
+// if ship isSunk, then scan 2D array and display
 
 const Gameboard = () => {
-  let board = createArray(10, 10);
-  const getBoard = () => board;
-
-  let ships = [];
+  let shipLayout = createBoardArray();
+  let boardActivity = createBoardArray();
+  let shipsArray = [];
   let shipCount = 0;
+
+  // this demonstrates that i === y-axis and j === x-axis
+  // let count = 0;
+  // for (let i = 0; i < BOARD_SIZE; i++) {
+  //   for (let j = 0; j < BOARD_SIZE; j++) {
+  //     board[i][j] = count;
+  //     count++;
+  //   }
+  // }
+
+  const getShipLayout = () => shipLayout;
+  const getBoardActivity = () => boardActivity;
+
   const placeShip = (length, axis, x, y) => {
-    ships[shipCount] = Ship(length);
+    shipsArray.push(Ship(length));
+
     if (axis === "X") {
       for (let i = 0; i < length; i++) {
-        board[y][x + i] = shipCount;
+        shipLayout[y][x + i] = shipCount;
       }
     } else if (axis === "Y") {
       for (let i = 0; i < length; i++) {
-        board[y + i][x] = shipCount;
+        shipLayout[y + i][x] = shipCount;
       }
     }
     shipCount++;
   };
+
+
 
   // check input and ship coords to determine if hit
   const receiveAttack = (x, y) => {
@@ -60,7 +78,7 @@ const Gameboard = () => {
     }
   };
 
-  return { getBoard, placeShip, receiveAttack, isGameOver };
+  return { getShipLayout, getBoardActivity, placeShip, receiveAttack, isGameOver };
 };
 
 export default Gameboard;
