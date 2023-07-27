@@ -6,11 +6,11 @@ const createBoardArray = () => {
   let array = new Array(BOARD_SIZE);
 
   for (let i = 0; i < BOARD_SIZE; i++) {
-    array[i] = new Array (BOARD_SIZE);
+    array[i] = new Array(BOARD_SIZE);
   }
 
   return array;
-}
+};
 
 // create 2D array that stores shipsArray indices where the ships lay
 // create another 2D array to store where hits and misses are
@@ -71,7 +71,13 @@ const Gameboard = () => {
     return isAllSunk;
   };
 
-  return { getShipLayout, getBoardActivity, placeShip, receiveAttack, isGameOver };
+  return {
+    getShipLayout,
+    getBoardActivity,
+    placeShip,
+    receiveAttack,
+    isGameOver,
+  };
 };
 
 export default Gameboard;

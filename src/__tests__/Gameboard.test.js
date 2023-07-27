@@ -31,7 +31,6 @@ test("place ship on board", () => {
     [, , , , , , , , , 1],
     [, , , , , , , , , 1],
   ]);
-
 });
 
 test("receive attack until ship sunk", () => {
