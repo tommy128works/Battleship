@@ -51,25 +51,30 @@ const Gameboard = () => {
     shipCount++;
   };
 
-
-
-  // check input and ship coords to determine if hit
   const receiveAttack = (x, y) => {
-    if (board[y][x] === "") {
-      board[y][x] = "X";
+    if (shipLayout[y][x] === "") {
+      boardActivity[y][x] = "miss";
     } else {
-      // it's a hit and i need to call the correct ship's hit()
-      board[y][x] = "O";
-      ships[board[y][x]].hit();
+      boardActivity[y][x] = "hit";
+      let shipIndex = shipLayout[y][x];
+      shipsArray[shipIndex].hit();
     }
   };
+
+
+
+
+
+
+
+
 
   // check if all ships have been sunk
   // needs to keep track of ships
   const isGameOver = () => {
     let allSunk = true;
     for (let i = 0; i < shipCount; i++) {
-      if (ships[i].isSunk() === false) {
+      if (shipsArray[i].isSunk() === false) {
         allSunk = false;
       }
     }
