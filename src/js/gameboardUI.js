@@ -16,7 +16,7 @@ const createGameboard = (id) => {
     for (let j = 0; j < BOARD_SIZE; j++) {
       let tile = document.createElement("div");
       tile.dataset.x = j;
-      tile.dataset.y = 7 - i;
+      tile.dataset.y = i;
       gameboardContainer.appendChild(tile);
     }
   }
