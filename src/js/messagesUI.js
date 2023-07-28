@@ -1,3 +1,18 @@
+import { createPlayerSetupPage } from "./gameboardUI";
+
+const displayPlayerSetUpPage = () => {
+  let contentContainer = document.getElementById("content-container");
+
+  contentContainer.innerHTML = "";
+  contentContainer.appendChild(createPlayerSetupPage());
+}
+
+const addStartGameButtonEventListeners = () => {
+  let startGameButton = document.getElementById("start-game-button");
+
+  startGameButton.addEventListener("click", displayPlayerSetUpPage);
+};
+
 const createStartPage = () => {
   let container = document.createElement("div");
   container.setAttribute("id", "start-page");
@@ -7,11 +22,11 @@ const createStartPage = () => {
   container.appendChild(title);
 
   let message = document.createElement("div");
-  message.textContent = "Play a game of Battleship against a computer!"
+  message.textContent = "Play a game of Battleship against a computer!";
   container.appendChild(message);
 
   message = document.createElement("div");
-  message.textContent = "Begin by clicking START GAME to set up your ships!"
+  message.textContent = "Begin by clicking START GAME to set up your ships!";
   container.appendChild(message);
 
   let startGameButton = document.createElement("button");
@@ -22,4 +37,4 @@ const createStartPage = () => {
   return container;
 };
 
-export default createStartPage;
+export { createStartPage, addStartGameButtonEventListeners };

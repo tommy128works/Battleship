@@ -1,9 +1,22 @@
 const BOARD_SIZE = 10;
 
-// create function that allows player to hover ships above board
+const createPlayerSetupPage = () => {
+  let container = document.createElement("div");
+  container.setAttribute("id", "player-setup-page");
 
-const createGameSetupModalBox = () => {
-  // create modal box that sets up player's board here
+  container.appendChild(createGameboard("player-setup"));
+
+  let axisButton = document.createElement("button");
+  axisButton.setAttribute("id", "axis-button");
+  axisButton.textContent = "AXIS: X";
+  container.appendChild(axisButton);
+
+
+  let setupMessage = document.createElement("div");
+  setupMessage.setAttribute("id", "setup-message");
+  container.appendChild(setupMessage);
+
+  return container;
 };
 
 const createGameboard = (id) => {
@@ -31,4 +44,4 @@ const createGameboard = (id) => {
   return container;
 };
 
-export { createGameboard, createGameSetupModalBox };
+export { createGameboard, createPlayerSetupPage };
