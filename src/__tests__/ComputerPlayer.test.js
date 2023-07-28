@@ -6,4 +6,3 @@ test.skip("Computer player makes random attack", () => {
 
   expect(computer.makeAttack()).toBe(true);
 });
-

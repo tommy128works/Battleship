@@ -12,7 +12,7 @@ const ComputerPlayer = () => {
     do {
       x = getRandomInt(10);
       y = getRandomInt(10);
-      string = x + "," + y; 
+      string = x + "," + y;
     } while (previousAttacks.includes(string));
 
     previousAttacks.push(string);
