@@ -1,6 +1,8 @@
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";
 
+$game-board-size: 30vw;
+
 body {
   margin: 0;
   background-color: #dddddd;
@@ -56,116 +58,37 @@ footer {
   font-size: 0.75rem;
 }
 
-.panel-container {
-  flex: 1;
-
+#content-container {
   display: flex;
+
+  div {
+    flex: 1;
+
+    h1 {
+      text-align: center;
+    }
+
+  }
 }
 
-.top-panel {
-  margin: 10px;
-}
+.game-board-container {
+  width: $game-board-size;
+  height: $game-board-size;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  box-shadow: 5px 5px 15px #292524;
 
-.left-panel {
-  flex: 1;
-}
-
-.right-panel {
-  flex: 1;
-
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.bottom-panel {
-  flex: 1;
-  margin: 10px;
-}
-
-.weather-detail-container {
-  display: flex;
-  width: 20vw;
   margin: auto;
 
-  img {
-    max-height: 50px;
-    width: auto;
-  }
-
-  .left-panel {
-    flex: 1;
-  }
-
-  .right-panel {
-    flex: 2;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-.horizontal-scroll-container {
-  display: flex;
-  overflow: auto;
-  cursor: grab;
-}
-
-.hourly-weather-container {
   div {
-    width: 10vw;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  img {
-    pointer-events: none;
-    cursor: default;
-  }
-}
-
-.daily-weather-container {
-  div {
-    display: flex;
-
-    div {
-      flex: 1;
-    }
+    text-align: center;
+    border: 1px solid black;
   }
 }
 
 @media (max-width: 600px) {
   $mobile-content-width: 95vw;
 
-  .top-panel {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .weather-detail-container {
-    display: flex;
-    width: 30vw;
-    margin: 10px;
-  }
-
-  .hourly-weather-container {
-    div {
-      width: 25vw;
-    }
-  }
-
-  footer {
-    flex-direction: column;
-
-    .divider {
-      display: none;
-    }
-  }
-}
-
-.hidden {
-  display: none;
+  
 }
