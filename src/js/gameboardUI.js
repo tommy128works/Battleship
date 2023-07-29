@@ -1,4 +1,5 @@
 const BOARD_SIZE = 10;
+import { allowPlayerShipPlacement } from "./gameDataHandler";
 
 const addShipHighlightHover = (shipLength, axis) => {
   let gameboard = document.getElementById("player-setup-gameboard-container");
@@ -28,7 +29,6 @@ const addShipHighlightHover = (shipLength, axis) => {
         currentNode = tiles[(y + i + 1) * 10 + x];
       }
     }
-    console.log(shipGroup);
 
     tile.addEventListener("mouseover", (event) => {
       shipGroup.forEach((element) => {
@@ -52,29 +52,6 @@ const addShipHighlightHover = (shipLength, axis) => {
   });
 };
 
-// allow player ship placement
-// have the "for loop" automatically run in this function
-const allowPlayerShipPlacement = (shipName) => {
-  let gameboard = document.getElementById("player-setup-gameboard-container");
-  let axisButton = document.getElementById("axis-button");
-  axisButton.dataset.ship = shipName;
-  let setupMessage = document.getElementById("setup-message");
-  // let tiles = gameboard.childNodes;
-
-  switch (shipName) {
-    case "Carrier":
-      setupMessage.textContent = "Place your carrier!";
-      // gameboard.dataset.shipLength = 5;
-
-      // enable hover with length of 5
-      addShipHighlightHover(5, axisButton.dataset.axis);
-
-      // allow user to rotate ship based on current axisbutton
-      // enable click to place ship
-      // addeventlistener to place ship using Gameboard Module
-      break;
-  }
-};
 
 // can create a dummy shipLayout data here
 // THIS FUNCTION IS PAUSED FOR NOW UNTIL IT IS NEEDED
@@ -166,6 +143,6 @@ const createGameboard = (gameboardId) => {
 export {
   createGameboard,
   createPlayerSetupPage,
-  allowPlayerShipPlacement,
   addAxisButtonEventListeners,
+  addShipHighlightHover,
 };
