@@ -11,19 +11,16 @@ const addShipHighlightHover = (shipLength, axis) => {
     let highlightGroup = [];
     let currentNode = tile;
 
-    // this works only for axis = "X"
-    for (let i = 0; i < shipLength; i++) {
-      highlightGroup.push(currentNode);
-      if (x > BOARD_SIZE - shipLength) {
-        break
+    // only axis = "X" has been implemented
+    if (axis === "X") {
+      for (let i = 0; i < shipLength; i++) {
+        highlightGroup.push(currentNode);
+        if (x > BOARD_SIZE - shipLength) {
+          break
+        }
+        currentNode = currentNode.nextSibling;
       }
-      currentNode = currentNode.nextSibling;
     }
-
-    // then search for relevant tiles using document.Query using the data-x and data-y coordinates
-    // then add the eventlisteners below on them
-    // check for edge case in which the ship doesn't fit on the board
-    // those will just highlight red with the remaining tiles
 
     tile.addEventListener("mouseover", (event) => {
       highlightGroup.forEach((element) => {
@@ -44,8 +41,6 @@ const addShipHighlightHover = (shipLength, axis) => {
         }
       })
     })
-
-
 
   });
 }
@@ -74,8 +69,6 @@ const allowPlayerShipPlacement = (shipName) => {
       break;
   }
 
-
-
 };
 
 // can create a dummy shipLayout data here
@@ -103,6 +96,20 @@ const updateGameboardDisplay = (
   }
 };
 
+const addAxisButtonEventListeners = () => {
+  let axisButton = document.getElementById("axis-button");
+
+  axisButton.addEventListener("click", (event) => {
+    if (axisButton.dataset.axis === "X") {
+      axisButton.textContent = "AXIS: Y";
+      axisButton.dataset.axis = "Y";
+    } else {
+      axisButton.textContent = "AXIS: X";
+      axisButton.dataset.axis = "X";
+    }
+  })
+}
+
 const createPlayerSetupPage = () => {
   let container = document.createElement("div");
   container.setAttribute("id", "player-setup-page");
@@ -112,6 +119,7 @@ const createPlayerSetupPage = () => {
   let axisButton = document.createElement("button");
   axisButton.setAttribute("id", "axis-button");
   axisButton.textContent = "AXIS: X";
+  axisButton.dataset.axis = "X";
   container.appendChild(axisButton);
 
   let setupMessage = document.createElement("div");
@@ -146,4 +154,4 @@ const createGameboard = (gameboardId) => {
   return container;
 };
 
-export { createGameboard, createPlayerSetupPage, allowPlayerShipPlacement };
+export { createGameboard, createPlayerSetupPage, allowPlayerShipPlacement, addAxisButtonEventListeners };
