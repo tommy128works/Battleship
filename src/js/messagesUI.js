@@ -4,9 +4,9 @@ const displayPlayerSetUpPage = () => {
   let contentContainer = document.getElementById("content-container");
 
   contentContainer.innerHTML = "";
-  contentContainer.appendChild(createPlayerSetupPage());
-  addAxisButtonEventListeners();
+  contentContainer.appendChild(createPlayerSetupPage("X"));
   allowPlayerShipPlacement("Carrier");
+  addAxisButtonEventListeners();
 };
 
 const addStartGameButtonEventListeners = () => {

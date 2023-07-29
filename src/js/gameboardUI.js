@@ -1,5 +1,9 @@
 const BOARD_SIZE = 10;
 
+const highlightShipGroup = () => {
+
+}
+
 const addShipHighlightHover = (shipLength, axis) => {
   let gameboard = document.getElementById("player-setup-gameboard-container");
   let tiles = gameboard.childNodes;
@@ -8,13 +12,13 @@ const addShipHighlightHover = (shipLength, axis) => {
     let x = tile.dataset.x;
     let y = tile.dataset.y;
 
-    let highlightGroup = [];
+    let shipGroup = [];
     let currentNode = tile;
 
     // only axis = "X" has been implemented
     if (axis === "X") {
       for (let i = 0; i < shipLength; i++) {
-        highlightGroup.push(currentNode);
+        shipGroup.push(currentNode);
         if (x > BOARD_SIZE - shipLength) {
           break
         }
@@ -23,8 +27,8 @@ const addShipHighlightHover = (shipLength, axis) => {
     }
 
     tile.addEventListener("mouseover", (event) => {
-      highlightGroup.forEach((element) => {
-        if (highlightGroup.length < shipLength) {
+      shipGroup.forEach((element) => {
+        if (shipGroup.length < shipLength) {
           element.classList.add("ship-setup-invalid");
         } else {
           element.classList.add("ship-setup-valid");
@@ -33,8 +37,8 @@ const addShipHighlightHover = (shipLength, axis) => {
     })
 
     tile.addEventListener("mouseout", (event) => {
-      highlightGroup.forEach((element) => {
-        if (highlightGroup.length < shipLength) {
+      shipGroup.forEach((element) => {
+        if (shipGroup.length < shipLength) {
           element.classList.remove("ship-setup-invalid");
         } else {
           element.classList.remove("ship-setup-valid");
@@ -50,8 +54,9 @@ const addShipHighlightHover = (shipLength, axis) => {
 const allowPlayerShipPlacement = (shipName) => {
   let gameboard = document.getElementById("player-setup-gameboard-container");
   let axisButton = document.getElementById("axis-button");
+  axisButton.dataset.ship = shipName;
   let setupMessage = document.getElementById("setup-message");
-  let tiles = gameboard.childNodes;
+  // let tiles = gameboard.childNodes;
 
   switch (shipName) {
     case "Carrier":
@@ -59,7 +64,7 @@ const allowPlayerShipPlacement = (shipName) => {
       // gameboard.dataset.shipLength = 5;
 
       // enable hover with length of 5
-      addShipHighlightHover(5, "X");
+      addShipHighlightHover(5, axisButton.dataset.axis);
 
 
 
@@ -98,19 +103,23 @@ const updateGameboardDisplay = (
 
 const addAxisButtonEventListeners = () => {
   let axisButton = document.getElementById("axis-button");
+  let contentContainer = document.getElementById("content-container");
+  let axis = axisButton.dataset.axis;
+  let ship = axisButton.dataset.ship;
 
   axisButton.addEventListener("click", (event) => {
-    if (axisButton.dataset.axis === "X") {
-      axisButton.textContent = "AXIS: Y";
-      axisButton.dataset.axis = "Y";
+    contentContainer.innerHTML ="";
+    if (axis === "X") {
+      contentContainer.appendChild(createPlayerSetupPage("Y"));
     } else {
-      axisButton.textContent = "AXIS: X";
-      axisButton.dataset.axis = "X";
+      contentContainer.appendChild(createPlayerSetupPage("X"));
     }
+    allowPlayerShipPlacement(ship);
+    addAxisButtonEventListeners();
   })
 }
 
-const createPlayerSetupPage = () => {
+const createPlayerSetupPage = (axis) => {
   let container = document.createElement("div");
   container.setAttribute("id", "player-setup-page");
 
@@ -118,8 +127,8 @@ const createPlayerSetupPage = () => {
 
   let axisButton = document.createElement("button");
   axisButton.setAttribute("id", "axis-button");
-  axisButton.textContent = "AXIS: X";
-  axisButton.dataset.axis = "X";
+  axisButton.textContent = "AXIS: " + axis;
+  axisButton.dataset.axis = axis;
   container.appendChild(axisButton);
 
   let setupMessage = document.createElement("div");
