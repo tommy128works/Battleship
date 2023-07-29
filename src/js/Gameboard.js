@@ -9,6 +9,12 @@ const createBoardArray = () => {
     array[i] = new Array(BOARD_SIZE);
   }
 
+  for (let i = 0; i < BOARD_SIZE; i++) {
+    for (let j = 0; j < BOARD_SIZE; j++) {
+      array[j][i] = null;
+    }
+  }
+
   return array;
 };
 
@@ -52,6 +58,8 @@ const Gameboard = () => {
       boardActivity[y][x] = "hit";
       let shipIndex = shipLayout[y][x];
       shipsArray[shipIndex].hit();
+
+      // if statement: if ship has sunk, traverse boardActivity and replace the "hit" with "sunk"
     }
   };
 
@@ -59,7 +67,7 @@ const Gameboard = () => {
     let isAllSunk = true;
     for (let i = 0; i < shipCount; i++) {
       if (shipsArray[i].isSunk() === false) {
-        allSunk = false;
+        isAllSunk = false;
       }
     }
     return isAllSunk;

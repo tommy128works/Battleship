@@ -52,7 +52,6 @@ const addShipHighlightHover = (shipLength, axis) => {
   });
 };
 
-
 // can create a dummy shipLayout data here
 // THIS FUNCTION IS PAUSED FOR NOW UNTIL IT IS NEEDED
 const updateGameboardDisplay = (
@@ -60,19 +59,17 @@ const updateGameboardDisplay = (
   shipLayout = null,
   boardActivity = null
 ) => {
-  // for player setup, only update using shipLayout
+  // let gameboard = document.getElementById(gameboardId);
 
-  // receive updated shipLayout and update gameboard
-  let gameboard = document.getElementById(gameboardId);
-
-  for (let i = 0; i < BOARD_SIZE; i++) {
-    for (let j = 0; j < BOARD_SIZE; j++) {
-      // delete all tiles then create it
-      // OR toggle classes of each one
-      let tile = document.querySelector(`[data-x="${j}"][data-y="${i}"]`);
-
-      if (shipLayout[j][i] !== "") {
-        tile.classList.add("player-ship-tile");
+  console.log(shipLayout);
+  if (shipLayout) {
+    for (let i = 0; i < BOARD_SIZE; i++) {
+      for (let j = 0; j < BOARD_SIZE; j++) {
+        if (shipLayout[j][i] !== null) {
+          let tile = document.querySelector(`[data-x="${i}"][data-y="${j}"]`);
+          tile.classList.add("player-ship-tile");
+          console.log("ship placed");
+        }
       }
     }
   }
@@ -145,4 +142,5 @@ export {
   createPlayerSetupPage,
   addAxisButtonEventListeners,
   addShipHighlightHover,
+  updateGameboardDisplay,
 };
