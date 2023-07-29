@@ -1,30 +1,34 @@
 const BOARD_SIZE = 10;
 
-const highlightShipGroup = () => {
-
-}
-
 const addShipHighlightHover = (shipLength, axis) => {
   let gameboard = document.getElementById("player-setup-gameboard-container");
   let tiles = gameboard.childNodes;
 
   tiles.forEach((tile) => {
-    let x = tile.dataset.x;
-    let y = tile.dataset.y;
+    let x = parseInt(tile.dataset.x);
+    let y = parseInt(tile.dataset.y);
 
     let shipGroup = [];
     let currentNode = tile;
 
-    // only axis = "X" has been implemented
     if (axis === "X") {
       for (let i = 0; i < shipLength; i++) {
         shipGroup.push(currentNode);
         if (x > BOARD_SIZE - shipLength) {
-          break
+          break;
         }
         currentNode = currentNode.nextSibling;
       }
+    } else {
+      for (let i = 0; i < shipLength; i++) {
+        shipGroup.push(currentNode);
+        if (y > BOARD_SIZE - shipLength) {
+          break;
+        }
+        currentNode = tiles[(y + i + 1) * 10 + x];
+      }
     }
+    console.log(shipGroup);
 
     tile.addEventListener("mouseover", (event) => {
       shipGroup.forEach((element) => {
@@ -33,8 +37,8 @@ const addShipHighlightHover = (shipLength, axis) => {
         } else {
           element.classList.add("ship-setup-valid");
         }
-      })
-    })
+      });
+    });
 
     tile.addEventListener("mouseout", (event) => {
       shipGroup.forEach((element) => {
@@ -43,11 +47,10 @@ const addShipHighlightHover = (shipLength, axis) => {
         } else {
           element.classList.remove("ship-setup-valid");
         }
-      })
-    })
-
+      });
+    });
   });
-}
+};
 
 // allow player ship placement
 // have the "for loop" automatically run in this function
@@ -66,14 +69,11 @@ const allowPlayerShipPlacement = (shipName) => {
       // enable hover with length of 5
       addShipHighlightHover(5, axisButton.dataset.axis);
 
-
-
       // allow user to rotate ship based on current axisbutton
       // enable click to place ship
       // addeventlistener to place ship using Gameboard Module
       break;
   }
-
 };
 
 // can create a dummy shipLayout data here
@@ -108,7 +108,7 @@ const addAxisButtonEventListeners = () => {
   let ship = axisButton.dataset.ship;
 
   axisButton.addEventListener("click", (event) => {
-    contentContainer.innerHTML ="";
+    contentContainer.innerHTML = "";
     if (axis === "X") {
       contentContainer.appendChild(createPlayerSetupPage("Y"));
     } else {
@@ -116,8 +116,8 @@ const addAxisButtonEventListeners = () => {
     }
     allowPlayerShipPlacement(ship);
     addAxisButtonEventListeners();
-  })
-}
+  });
+};
 
 const createPlayerSetupPage = (axis) => {
   let container = document.createElement("div");
@@ -163,4 +163,9 @@ const createGameboard = (gameboardId) => {
   return container;
 };
 
-export { createGameboard, createPlayerSetupPage, allowPlayerShipPlacement, addAxisButtonEventListeners };
+export {
+  createGameboard,
+  createPlayerSetupPage,
+  allowPlayerShipPlacement,
+  addAxisButtonEventListeners,
+};
