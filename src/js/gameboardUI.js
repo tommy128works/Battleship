@@ -5,14 +5,19 @@ const addShipHighlightHover = (shipLength, axis) => {
   let tiles = gameboard.childNodes;
 
   tiles.forEach((tile) => {
+    let x = tile.dataset.x;
+    let y = tile.dataset.y;
+
     let highlightGroup = [];
     let currentNode = tile;
 
+    // this works only for axis = "X"
     for (let i = 0; i < shipLength; i++) {
       highlightGroup.push(currentNode);
-      if (currentNode.nextSibling) {
-        currentNode = currentNode.nextSibling;
+      if (x > BOARD_SIZE - shipLength) {
+        break
       }
+      currentNode = currentNode.nextSibling;
     }
 
     // then search for relevant tiles using document.Query using the data-x and data-y coordinates
@@ -22,13 +27,21 @@ const addShipHighlightHover = (shipLength, axis) => {
 
     tile.addEventListener("mouseover", (event) => {
       highlightGroup.forEach((element) => {
-        element.classList.add("ship-setup-valid");
+        if (highlightGroup.length < shipLength) {
+          element.classList.add("ship-setup-invalid");
+        } else {
+          element.classList.add("ship-setup-valid");
+        }
       })
     })
 
     tile.addEventListener("mouseout", (event) => {
       highlightGroup.forEach((element) => {
-        element.classList.remove("ship-setup-valid");
+        if (highlightGroup.length < shipLength) {
+          element.classList.remove("ship-setup-invalid");
+        } else {
+          element.classList.remove("ship-setup-valid");
+        }
       })
     })
 
