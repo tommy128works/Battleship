@@ -1,11 +1,12 @@
-import { createPlayerSetupPage } from "./gameboardUI";
+import { createPlayerSetupPage, allowPlayerShipPlacement } from "./gameboardUI";
 
 const displayPlayerSetUpPage = () => {
   let contentContainer = document.getElementById("content-container");
 
   contentContainer.innerHTML = "";
   contentContainer.appendChild(createPlayerSetupPage());
-}
+  allowPlayerShipPlacement("Carrier");
+};
 
 const addStartGameButtonEventListeners = () => {
   let startGameButton = document.getElementById("start-game-button");

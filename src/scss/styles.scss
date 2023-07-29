@@ -70,6 +70,18 @@ footer {
   }
 }
 
+// .player-ship-tile {
+//   background-color: darkgray;
+// }
+
+.ship-setup-valid {
+  background-color: greenyellow;
+}
+
+.ship-setup-invalid {
+  background-color: red;
+}
+
 .game-board-container {
   width: $game-board-size;
   height: $game-board-size;
@@ -86,7 +98,8 @@ footer {
   }
 }
 
-#start-page, #player-setup-page {
+#start-page,
+#player-setup-page {
   margin: 5vw;
   display: flex;
   flex-direction: column;

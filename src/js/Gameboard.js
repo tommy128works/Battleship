@@ -12,12 +12,6 @@ const createBoardArray = () => {
   return array;
 };
 
-// create 2D array that stores shipsArray indices where the ships lay
-// create another 2D array to store where hits and misses are
-
-// things to store: hits, missed hits, ships
-// if ship isSunk, then scan 2D array and display
-
 const Gameboard = () => {
   let shipLayout = createBoardArray();
   let boardActivity = createBoardArray();
