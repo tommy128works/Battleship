@@ -52,8 +52,6 @@ const addShipHighlightHover = (shipLength, axis) => {
   });
 };
 
-// can create a dummy shipLayout data here
-// THIS FUNCTION IS PAUSED FOR NOW UNTIL IT IS NEEDED
 const updateGameboardDisplay = (
   gameboardId,
   shipLayout = null,
@@ -61,36 +59,16 @@ const updateGameboardDisplay = (
 ) => {
   // let gameboard = document.getElementById(gameboardId);
 
-  console.log(shipLayout);
   if (shipLayout) {
     for (let i = 0; i < BOARD_SIZE; i++) {
       for (let j = 0; j < BOARD_SIZE; j++) {
         if (shipLayout[j][i] !== null) {
           let tile = document.querySelector(`[data-x="${i}"][data-y="${j}"]`);
           tile.classList.add("player-ship-tile");
-          console.log("ship placed");
         }
       }
     }
   }
-};
-
-const addAxisButtonEventListeners = () => {
-  let axisButton = document.getElementById("axis-button");
-  let contentContainer = document.getElementById("content-container");
-  let axis = axisButton.dataset.axis;
-  let ship = axisButton.dataset.ship;
-
-  axisButton.addEventListener("click", (event) => {
-    contentContainer.innerHTML = "";
-    if (axis === "X") {
-      contentContainer.appendChild(createPlayerSetupPage("Y"));
-    } else {
-      contentContainer.appendChild(createPlayerSetupPage("X"));
-    }
-    allowPlayerShipPlacement(ship);
-    addAxisButtonEventListeners();
-  });
 };
 
 const createPlayerSetupPage = (axis) => {
@@ -140,7 +118,6 @@ const createGameboard = (gameboardId) => {
 export {
   createGameboard,
   createPlayerSetupPage,
-  addAxisButtonEventListeners,
   addShipHighlightHover,
   updateGameboardDisplay,
 };

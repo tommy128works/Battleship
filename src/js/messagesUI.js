@@ -1,8 +1,8 @@
+import { createPlayerSetupPage } from "./gameboardUI";
 import {
-  createPlayerSetupPage,
+  allowPlayerShipPlacement,
   addAxisButtonEventListeners,
-} from "./gameboardUI";
-import { allowPlayerShipPlacement } from "./gameDataHandler";
+} from "./gameDataHandler";
 
 const displayPlayerSetUpPage = () => {
   let contentContainer = document.getElementById("content-container");
