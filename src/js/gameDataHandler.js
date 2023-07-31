@@ -141,8 +141,6 @@ const initializeGameLoop = () => {
     playerGameboard.getShipLayout()
   );
 
-  // generate ship placement
-  // repeat for each ship
   const shipSizes = [5, 4, 3, 3, 2];
   let counter = 0;
 
@@ -155,12 +153,10 @@ const initializeGameLoop = () => {
     }
   } while (counter < shipSizes.length);
   // display it for development purposes
-  console.log("hello");
   updateGameboardDisplay(
     "computer-gameboard-container",
     computerGameboard.getShipLayout()
   );
-  console.log(computerGameboard.getShipLayout());
 };
 
 export { allowPlayerShipPlacement, addAxisButtonEventListeners };

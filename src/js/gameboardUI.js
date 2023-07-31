@@ -57,13 +57,14 @@ const updateGameboardDisplay = (
   shipLayout = null,
   boardActivity = null
 ) => {
-  // let gameboard = document.getElementById(gameboardId);
+  let gameboard = document.getElementById(gameboardId);
+  let tiles = gameboard.childNodes;
 
   if (shipLayout) {
     for (let i = 0; i < BOARD_SIZE; i++) {
       for (let j = 0; j < BOARD_SIZE; j++) {
         if (shipLayout[j][i] !== null) {
-          let tile = document.querySelector(`[data-x="${i}"][data-y="${j}"]`);
+          let tile = tiles[(j * 10) + i];
           tile.classList.add("player-ship-tile");
         }
       }
