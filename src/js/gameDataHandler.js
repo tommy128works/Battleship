@@ -25,6 +25,14 @@ const allowPlayerShipPlacement = (shipName) => {
       setupMessage.textContent = "Place your destroyer!";
       addShipHighlightHover(3, axisButton.dataset.axis);
       break;
+    case "Submarine":
+      setupMessage.textContent = "Place your submarine!";
+      addShipHighlightHover(3, axisButton.dataset.axis);
+      break;
+    case "Patrol Boat":
+      setupMessage.textContent = "Place your patrol boat!";
+      addShipHighlightHover(2, axisButton.dataset.axis);
+      break;
   }
 
   let tiles = gameboard.childNodes;
@@ -53,6 +61,14 @@ const allowPlayerShipPlacement = (shipName) => {
           case "Destroyer":
             playerGameboard.placeShip(3, axis, x, y);
             allowPlayerShipPlacement("Submarine");
+            break;
+          case "Submarine":
+            playerGameboard.placeShip(3, axis, x, y);
+            allowPlayerShipPlacement("Patrol Boat");
+            break;
+          case "Patrol Boat":
+            playerGameboard.placeShip(2, axis, x, y);
+            // transition to main game loop
             break;
         }
 
