@@ -41,14 +41,25 @@ const Gameboard = () => {
 
     if (axis === "X") {
       for (let i = 0; i < length; i++) {
+        if (shipLayout[y][x + i] !== null) {
+          return false;
+        }
+      }
+      for (let i = 0; i < length; i++) {
         shipLayout[y][x + i] = shipCount;
       }
     } else if (axis === "Y") {
+      for (let i = 0; i < length; i++) {
+        if (shipLayout[y + i][x] !== null) {
+          return false;
+        } 
+      }
       for (let i = 0; i < length; i++) {
         shipLayout[y + i][x] = shipCount;
       }
     }
     shipCount++;
+    return true;
   };
 
   const receiveAttack = (x, y) => {

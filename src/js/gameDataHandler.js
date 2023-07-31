@@ -46,31 +46,62 @@ const allowPlayerShipPlacement = (shipName) => {
         let x = parseInt(event.target.dataset.x);
         let y = parseInt(event.target.dataset.y);
 
-        contentContainer.innerHTML = "";
-        contentContainer.appendChild(createPlayerSetupPage(axis));
+        // contentContainer.innerHTML = "";
+        // contentContainer.appendChild(createPlayerSetupPage(axis));
 
         switch (shipName) {
           case "Carrier":
-            playerGameboard.placeShip(5, axis, x, y);
-            allowPlayerShipPlacement("Battleship");
+            if (!playerGameboard.placeShip(5, axis, x, y)) {
+              return;
+            }
             break;
           case "Battleship":
-            playerGameboard.placeShip(4, axis, x, y);
-            allowPlayerShipPlacement("Destroyer");
+            if (!playerGameboard.placeShip(4, axis, x, y)) {
+              return;
+            }
             break;
           case "Destroyer":
-            playerGameboard.placeShip(3, axis, x, y);
-            allowPlayerShipPlacement("Submarine");
+            if (!playerGameboard.placeShip(3, axis, x, y)) {
+              return;
+            }
             break;
           case "Submarine":
-            playerGameboard.placeShip(3, axis, x, y);
-            allowPlayerShipPlacement("Patrol Boat");
+            if (!playerGameboard.placeShip(3, axis, x, y)) {
+              return;
+            }
             break;
           case "Patrol Boat":
-            playerGameboard.placeShip(2, axis, x, y);
+            if (!playerGameboard.placeShip(2, axis, x, y)) {
+              return;
+            }
             // transition to main game loop
             break;
         }
+
+        contentContainer.innerHTML = "";
+        contentContainer.appendChild(createPlayerSetupPage(axis));
+        
+        switch (shipName) {
+          case "Carrier":
+            allowPlayerShipPlacement("Battleship");
+            break;
+          case "Battleship":
+            allowPlayerShipPlacement("Destroyer");
+            break;
+          case "Destroyer":
+            allowPlayerShipPlacement("Submarine");
+            break;
+          case "Submarine":
+            allowPlayerShipPlacement("Patrol Boat");
+            break;
+          case "Patrol Boat":
+            // transition to main game loop
+            break;
+        }
+
+
+
+
 
         addAxisButtonEventListeners();
         updateGameboardDisplay(
