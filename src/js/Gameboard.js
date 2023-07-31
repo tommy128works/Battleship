@@ -40,6 +40,9 @@ const Gameboard = () => {
     shipsArray.push(Ship(length));
 
     if (axis === "X") {
+      if (x + length >= BOARD_SIZE) {
+        return false;
+      }
       for (let i = 0; i < length; i++) {
         if (shipLayout[y][x + i] !== null) {
           return false;
@@ -49,10 +52,13 @@ const Gameboard = () => {
         shipLayout[y][x + i] = shipCount;
       }
     } else if (axis === "Y") {
+      if (y + length >= BOARD_SIZE) {
+        return false;
+      }
       for (let i = 0; i < length; i++) {
         if (shipLayout[y + i][x] !== null) {
           return false;
-        } 
+        }
       }
       for (let i = 0; i < length; i++) {
         shipLayout[y + i][x] = shipCount;

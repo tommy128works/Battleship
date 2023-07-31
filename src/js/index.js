@@ -17,7 +17,4 @@ document.body.appendChild(contentContainer);
 
 addStartGameButtonEventListeners();
 
-// contentContainer.appendChild(createGameboard("player"));
-// contentContainer.appendChild(createGameboard("computer"));
-
 let playerGameboard = Gameboard();

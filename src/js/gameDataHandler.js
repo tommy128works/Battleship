@@ -1,10 +1,38 @@
 import { addShipHighlightHover } from "./gameboardUI";
 import Gameboard from "./Gameboard";
-import { createPlayerSetupPage, updateGameboardDisplay } from "./gameboardUI";
+import {
+  createPlayerSetupPage,
+  updateGameboardDisplay,
+  createMainGameDisplay,
+} from "./gameboardUI";
+import ComputerPlayer from "./ComputerPlayer";
 
 let playerGameboard = Gameboard();
+let computerGameboard = Gameboard();
+let computerAI = ComputerPlayer();
 
-// have the "for loop" automatically run in this function
+const addAxisButtonEventListeners = () => {
+  let axisButton = document.getElementById("axis-button");
+  let contentContainer = document.getElementById("content-container");
+  let axis = axisButton.dataset.axis;
+  let ship = axisButton.dataset.ship;
+
+  axisButton.addEventListener("click", (event) => {
+    contentContainer.innerHTML = "";
+    if (axis === "X") {
+      contentContainer.appendChild(createPlayerSetupPage("Y"));
+    } else {
+      contentContainer.appendChild(createPlayerSetupPage("X"));
+    }
+    allowPlayerShipPlacement(ship);
+    updateGameboardDisplay(
+      "player-setup-gameboard-container",
+      playerGameboard.getShipLayout()
+    );
+    addAxisButtonEventListeners();
+  });
+};
+
 const allowPlayerShipPlacement = (shipName) => {
   let gameboard = document.getElementById("player-setup-gameboard-container");
   let axisButton = document.getElementById("axis-button");
@@ -46,9 +74,6 @@ const allowPlayerShipPlacement = (shipName) => {
         let x = parseInt(event.target.dataset.x);
         let y = parseInt(event.target.dataset.y);
 
-        // contentContainer.innerHTML = "";
-        // contentContainer.appendChild(createPlayerSetupPage(axis));
-
         switch (shipName) {
           case "Carrier":
             if (!playerGameboard.placeShip(5, axis, x, y)) {
@@ -74,13 +99,12 @@ const allowPlayerShipPlacement = (shipName) => {
             if (!playerGameboard.placeShip(2, axis, x, y)) {
               return;
             }
-            // transition to main game loop
             break;
         }
 
         contentContainer.innerHTML = "";
         contentContainer.appendChild(createPlayerSetupPage(axis));
-        
+
         switch (shipName) {
           case "Carrier":
             allowPlayerShipPlacement("Battleship");
@@ -95,13 +119,11 @@ const allowPlayerShipPlacement = (shipName) => {
             allowPlayerShipPlacement("Patrol Boat");
             break;
           case "Patrol Boat":
-            // transition to main game loop
+            createMainGameDisplay();
+            initializeGameLoop();
+            return;
             break;
         }
-
-
-
-
 
         addAxisButtonEventListeners();
         updateGameboardDisplay(
@@ -113,26 +135,32 @@ const allowPlayerShipPlacement = (shipName) => {
   });
 };
 
-const addAxisButtonEventListeners = () => {
-  let axisButton = document.getElementById("axis-button");
-  let contentContainer = document.getElementById("content-container");
-  let axis = axisButton.dataset.axis;
-  let ship = axisButton.dataset.ship;
+const initializeGameLoop = () => {
+  updateGameboardDisplay(
+    "player-gameboard-container",
+    playerGameboard.getShipLayout()
+  );
 
-  axisButton.addEventListener("click", (event) => {
-    contentContainer.innerHTML = "";
-    if (axis === "X") {
-      contentContainer.appendChild(createPlayerSetupPage("Y"));
-    } else {
-      contentContainer.appendChild(createPlayerSetupPage("X"));
+  // generate ship placement
+  // repeat for each ship
+  const shipSizes = [5, 4, 3, 3, 2];
+  let counter = 0;
+
+  do {
+    let [x, y, axis] = computerAI.getRandomShipPlacement();
+    console.log([x, y, axis]);
+
+    if (computerGameboard.placeShip(shipSizes[counter], axis, x, y)) {
+      counter++;
     }
-    allowPlayerShipPlacement(ship);
-    updateGameboardDisplay(
-      "player-setup-gameboard-container",
-      playerGameboard.getShipLayout()
-    );
-    addAxisButtonEventListeners();
-  });
+  } while (counter < shipSizes.length);
+  // display it for development purposes
+  console.log("hello");
+  updateGameboardDisplay(
+    "computer-gameboard-container",
+    computerGameboard.getShipLayout()
+  );
+  console.log(computerGameboard.getShipLayout());
 };
 
 export { allowPlayerShipPlacement, addAxisButtonEventListeners };

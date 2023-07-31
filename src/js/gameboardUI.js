@@ -115,9 +115,18 @@ const createGameboard = (gameboardId) => {
   return container;
 };
 
+const createMainGameDisplay = () => {
+  let contentContainer = document.getElementById("content-container");
+  contentContainer.innerHTML = "";
+
+  contentContainer.appendChild(createGameboard("player"));
+  contentContainer.appendChild(createGameboard("computer"));
+};
+
 export {
   createGameboard,
   createPlayerSetupPage,
   addShipHighlightHover,
   updateGameboardDisplay,
+  createMainGameDisplay,
 };
