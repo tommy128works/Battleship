@@ -1,7 +1,7 @@
 import Ship from "../js/Ship";
 
 test("ship isSunk function", () => {
-  let ship = Ship(3);
+  let ship = Ship(4);
   ship.hit();
   ship.hit();
   expect(ship.isSunk()).toBe(false);

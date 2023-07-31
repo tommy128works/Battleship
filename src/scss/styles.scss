@@ -70,16 +70,16 @@ footer {
   }
 }
 
-.player-ship-tile {
-  background-color: darkgray;
-}
-
 .ship-setup-valid {
   background-color: greenyellow;
 }
 
 .ship-setup-invalid {
   background-color: red;
+}
+
+.player-ship-tile {
+  background-color: darkgray;
 }
 
 .hit-tile {
@@ -92,6 +92,13 @@ footer {
 
 .sunk-tile {
   background-color: red;
+}
+
+.player-ship-tile,
+.hit-tile,
+.miss-tile,
+.sunk-tile {
+  pointer-events: none;
 }
 
 .game-board-container {

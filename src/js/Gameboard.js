@@ -37,7 +37,7 @@ const Gameboard = () => {
   const getBoardActivity = () => boardActivity;
 
   const placeShip = (length, axis, x, y) => {
-    shipsArray.push(Ship(length));
+
 
     if (axis === "X") {
       if (x + length > BOARD_SIZE) {
@@ -64,19 +64,29 @@ const Gameboard = () => {
         shipLayout[y + i][x] = shipCount;
       }
     }
+    shipsArray.push(Ship(length));
     shipCount++;
     return true;
   };
 
   const receiveAttack = (x, y) => {
+
     if (shipLayout[y][x] === null) {
       boardActivity[y][x] = "miss";
     } else {
       boardActivity[y][x] = "hit";
-      let shipIndex = shipLayout[y][x];
+      let shipIndex = parseInt(shipLayout[y][x]);
       shipsArray[shipIndex].hit();
 
-      // if statement: if ship has sunk, traverse boardActivity and replace the "hit" with "sunk"
+      if (shipsArray[shipIndex].isSunk()) {
+        for (let i = 0; i < BOARD_SIZE; i++) {
+          for (let j = 0; j < BOARD_SIZE; j++) {
+            if (parseInt(shipLayout[j][i]) === shipIndex) {
+              boardActivity[j][i] = "sunk";
+            }
+          }
+        }
+      }
     }
   };
 

@@ -64,7 +64,7 @@ const updateGameboardDisplay = (
     for (let i = 0; i < BOARD_SIZE; i++) {
       for (let j = 0; j < BOARD_SIZE; j++) {
         if (shipLayout[j][i] !== null) {
-          let tile = tiles[(j * 10) + i];
+          let tile = tiles[j * 10 + i];
           tile.classList.add("player-ship-tile");
         }
       }
@@ -74,12 +74,14 @@ const updateGameboardDisplay = (
   if (boardActivity) {
     for (let i = 0; i < BOARD_SIZE; i++) {
       for (let j = 0; j < BOARD_SIZE; j++) {
-        let tile = tiles[(j * 10) + i];
+        let tile = tiles[j * 10 + i];
 
         if (boardActivity[j][i] === "hit") {
           tile.classList.add("hit-tile");
         } else if (boardActivity[j][i] === "miss") {
           tile.classList.add("miss-tile");
+        } else if (boardActivity[j][i] === "sunk") {
+          tile.classList.add("sunk-tile");
         }
       }
     }

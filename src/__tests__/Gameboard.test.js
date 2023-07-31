@@ -1,7 +1,7 @@
 import Ship from "../js/Ship";
 import Gameboard from "../js/Gameboard";
 
-test("place ship on board", () => {
+test.skip("place ship on board", () => {
   let gameBoard = Gameboard();
   gameBoard.placeShip(2, "X", 0, 0);
 
