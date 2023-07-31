@@ -82,6 +82,18 @@ footer {
   background-color: red;
 }
 
+.hit-tile {
+  background-color: orange;
+}
+
+.miss-tile {
+  background-color: green;
+}
+
+.sunk-tile {
+  background-color: red;
+}
+
 .game-board-container {
   width: $game-board-size;
   height: $game-board-size;

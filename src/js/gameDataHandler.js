@@ -146,7 +146,6 @@ const initializeGameLoop = () => {
 
   do {
     let [x, y, axis] = computerAI.getRandomShipPlacement();
-    console.log([x, y, axis]);
 
     if (computerGameboard.placeShip(shipSizes[counter], axis, x, y)) {
       counter++;
@@ -157,6 +156,51 @@ const initializeGameLoop = () => {
     "computer-gameboard-container",
     computerGameboard.getShipLayout()
   );
+
+  mainGameLoop();
 };
+
+const mainGameLoop = () => {
+  let computerBoardDOM = document.getElementById("computer-gameboard-container");
+  let computerTiles = computerBoardDOM.childNodes;
+  // player turn event listeners
+  computerTiles.forEach((tile) => {
+
+
+    tile.addEventListener(("click"), (event) => {
+      let x = event.target.dataset.x;
+      let y = event.target.dataset.y;
+
+      computerGameboard.receiveAttack(x, y);
+      updateGameboardDisplay("computer-gameboard-container", null, computerGameboard.getBoardActivity());
+
+      // send attack to enemy board
+      // register hit or miss
+      // update enemy gameboard display 
+      // need to prevent clicking on coloured tiles
+
+      // immediately generate enemy attack
+
+
+
+
+    })
+  })
+  
+  
+
+
+
+
+
+
+ 
+
+
+
+
+  // at the end, check conditions for game over
+  // if game over, display winner message and reset button
+}
 
 export { allowPlayerShipPlacement, addAxisButtonEventListeners };

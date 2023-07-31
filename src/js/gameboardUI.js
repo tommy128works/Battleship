@@ -70,6 +70,20 @@ const updateGameboardDisplay = (
       }
     }
   }
+
+  if (boardActivity) {
+    for (let i = 0; i < BOARD_SIZE; i++) {
+      for (let j = 0; j < BOARD_SIZE; j++) {
+        let tile = tiles[(j * 10) + i];
+
+        if (boardActivity[j][i] === "hit") {
+          tile.classList.add("hit-tile");
+        } else if (boardActivity[j][i] === "miss") {
+          tile.classList.add("miss-tile");
+        }
+      }
+    }
+  }
 };
 
 const createPlayerSetupPage = (axis) => {

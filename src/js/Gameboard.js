@@ -69,7 +69,7 @@ const Gameboard = () => {
   };
 
   const receiveAttack = (x, y) => {
-    if (shipLayout[y][x] === "") {
+    if (shipLayout[y][x] === null) {
       boardActivity[y][x] = "miss";
     } else {
       boardActivity[y][x] = "hit";
