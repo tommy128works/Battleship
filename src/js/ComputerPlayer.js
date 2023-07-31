@@ -30,11 +30,7 @@ const ComputerPlayer = () => {
       y = getRandomInt(BOARD_SIZE);
       string = x + "," + y;
     } while (previousAttacks.includes(string));
-
     previousAttacks.push(string);
-
-    console.log(previousAttacks);
-
     return [x, y];
   };
 

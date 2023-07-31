@@ -166,7 +166,7 @@ const mainGameLoop = () => {
     "computer-gameboard-container"
   );
   let computerTiles = computerBoardDOM.childNodes;
-  // player turn event listeners
+  
   computerTiles.forEach((tile) => {
     tile.addEventListener("click", (event) => {
       let x = event.target.dataset.x;
@@ -179,12 +179,16 @@ const mainGameLoop = () => {
         computerGameboard.getBoardActivity()
       );
 
-      // send attack to enemy board
-      // register hit or miss
-      // update enemy gameboard display
-      // need to prevent clicking on coloured tiles
-
       // immediately generate enemy attack
+      // update player's gameboard
+      [x, y] = computerAI.makeAttack();
+      playerGameboard.receiveAttack(x, y);
+      updateGameboardDisplay(
+        "player-gameboard-container",
+        null,
+        playerGameboard.getBoardActivity()
+      );
+
     });
   });
 
