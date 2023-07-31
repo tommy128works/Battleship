@@ -2,6 +2,7 @@ import { createPlayerSetupPage } from "./gameboardUI";
 import {
   allowPlayerShipPlacement,
   addAxisButtonEventListeners,
+  resetGameData,
 } from "./gameDataHandler";
 
 const displayPlayerSetUpPage = () => {
@@ -43,4 +44,35 @@ const createStartPage = () => {
   return container;
 };
 
-export { createStartPage, addStartGameButtonEventListeners };
+const createGameOverMessage = (winnerString) => {
+  let container = document.createElement("div");
+  container.classList.add("game-over-container");
+
+  let message = document.createElement("div");
+  message.textContent = winnerString + " has won!";
+  container.appendChild(message);
+
+  let resetButton = document.createElement("button");
+  resetButton.setAttribute("id", "reset-button");
+  resetButton.textContent = "RESET GAME";
+  container.appendChild(resetButton);
+
+  return container;
+};
+
+const addResetButtonEventListeners = () => {
+  let resetButton = document.getElementById("reset-button");
+  let gameOverContainer = document.querySelector(".game-over-container");
+  resetButton.addEventListener("click", (event) => {
+    gameOverContainer.remove();
+    resetGameData();
+    displayPlayerSetUpPage();
+  });
+};
+
+export {
+  createStartPage,
+  addStartGameButtonEventListeners,
+  createGameOverMessage,
+  addResetButtonEventListeners,
+};

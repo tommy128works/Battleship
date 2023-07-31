@@ -37,8 +37,6 @@ const Gameboard = () => {
   const getBoardActivity = () => boardActivity;
 
   const placeShip = (length, axis, x, y) => {
-
-
     if (axis === "X") {
       if (x + length > BOARD_SIZE) {
         return false;
@@ -70,7 +68,6 @@ const Gameboard = () => {
   };
 
   const receiveAttack = (x, y) => {
-
     if (shipLayout[y][x] === null) {
       boardActivity[y][x] = "miss";
     } else {

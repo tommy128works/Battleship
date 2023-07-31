@@ -6,6 +6,10 @@ import {
   createMainGameDisplay,
 } from "./gameboardUI";
 import ComputerPlayer from "./ComputerPlayer";
+import {
+  createGameOverMessage,
+  addResetButtonEventListeners,
+} from "./messagesUI";
 
 let playerGameboard = Gameboard();
 let computerGameboard = Gameboard();
@@ -156,7 +160,6 @@ const initializeGameLoop = () => {
   //   "computer-gameboard-container",
   //   computerGameboard.getShipLayout()
   // );
-  
 
   mainGameLoop();
 };
@@ -166,7 +169,7 @@ const mainGameLoop = () => {
     "computer-gameboard-container"
   );
   let computerTiles = computerBoardDOM.childNodes;
-  
+
   computerTiles.forEach((tile) => {
     tile.addEventListener("click", (event) => {
       let x = event.target.dataset.x;
@@ -179,8 +182,6 @@ const mainGameLoop = () => {
         computerGameboard.getBoardActivity()
       );
 
-      // immediately generate enemy attack
-      // update player's gameboard
       [x, y] = computerAI.makeAttack();
       playerGameboard.receiveAttack(x, y);
       updateGameboardDisplay(
@@ -189,11 +190,21 @@ const mainGameLoop = () => {
         playerGameboard.getBoardActivity()
       );
 
+      if (playerGameboard.isGameOver()) {
+        document.body.appendChild(createGameOverMessage("Computer"));
+        addResetButtonEventListeners();
+      } else if (computerGameboard.isGameOver()) {
+        document.body.appendChild(createGameOverMessage("Player"));
+        addResetButtonEventListeners();
+      }
     });
   });
-
-  // at the end, check conditions for game over
-  // if game over, display winner message and reset button
 };
 
-export { allowPlayerShipPlacement, addAxisButtonEventListeners };
+const resetGameData = () => {
+  playerGameboard = Gameboard();
+  computerGameboard = Gameboard();
+  computerAI = ComputerPlayer();
+};
+
+export { allowPlayerShipPlacement, addAxisButtonEventListeners, resetGameData };
