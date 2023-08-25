@@ -2,22 +2,16 @@
 
 ![Screenshot of the App Overview](/src/assets/screenshots/Battleship_Showcase.png)
 
-[View DEMO Here!](https://tommy128works.github.io/Knights-Travails/)
+[View DEMO Here!](https://tommy128works.github.io/Battleship/)
 
 > [!NOTE]
 > This project is best viewed on a desktop. It is not suited for mobile view.
 
 ## Project Description
 
-Find the shortest path between two squares travelled by a knight! 
+Play battleship against a computer!
 
-I initially tried a binary search tree (BST) approach that:
-1. Listed all the knight's possible moves from the start position. 
-2. Find shortest path by using breadth-first search (BFS) to find the end position.
-
-This approach led to numerous nested recursive functions to manage and did not yield much success.
-
-I then used the graph data-structure approach created by [tylphe](https://github.com/TYLPHE/knights-travails) which used depth-first search (DFS). Surprisingly, this approach used more concise code and worked incredibly!
+This project heavily used JavaScript Factory Functions and Module Pattern to create each logic or user-interface (UI) component. Additionally, Jest Testing was used to validate the app's logic through a Test Driven Development (TDD) approach.
 
 Overall, this was a great learning experience for applying data structures and algorithms to solve problems.
 
@@ -25,9 +19,9 @@ Technologies Used:
 - Webpack
 - JavaScript
 - CSS and SASS
+- Jest Testing
 
 Notable Coding Techniques Used:
-- Data Structures and Algorithms
 - ES6 Modules
 - JavaScript Factory Functions
 - JavaScript Module Pattern
@@ -41,7 +35,7 @@ npm install
 npm start
 ```
 
-Otherwise, please check out the [DEMO!](https://tommy128works.github.io/Knights-Travails/)
+Otherwise, please check out the [DEMO!](https://tommy128works.github.io/Battleship/)
 
 ## How to Use the Project
 
