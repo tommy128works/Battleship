@@ -5,7 +5,7 @@
 [View DEMO Here!](https://tommy128works.github.io/Battleship/)
 
 > [!NOTE]
-> This project is best viewed on a desktop. It is not suited for mobile view.
+> This project is best viewed on a desktop.
 
 ## Project Description
 
